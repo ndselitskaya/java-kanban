@@ -1,5 +1,5 @@
 import java.util.HashMap;
-
+//коммит пупупу
 //класс для работы с задачами
 public class TaskManager {
     private int counter = 0; //поле счетчик для ид
