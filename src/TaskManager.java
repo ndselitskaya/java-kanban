@@ -93,7 +93,6 @@ public class TaskManager {
     public void updateTask(Task task){
         if (tasks.containsKey(task.getId())){
             tasks.put(task.getId(), task);
-            System.out.println("Задача обновлена");
         } else {
             System.out.println("Такой задачи нет");
         }
@@ -102,7 +101,6 @@ public class TaskManager {
     public void updateSubtask(Subtask subtask){
         if (subtasks.containsKey(subtask.getId())){
             subtasks.put(subtask.getId(), subtask);
-            System.out.println("Подзадача обновлена");
             changeEpicStatus(subtask.getIdEpic());
         } else {
             System.out.println("Такой подзадачи нет");
@@ -112,7 +110,6 @@ public class TaskManager {
     public void updateEpic(Epic epic){
         if (epics.containsKey(epic.getId())){
             epics.put(epic.getId(), epic);
-            System.out.println("Эпик обновлен");
         } else {
             System.out.println("Такого эпика нет");
         }
@@ -122,7 +119,6 @@ public class TaskManager {
     public void deleteTaskById(Integer id){
         if (tasks.containsKey(id)){
             tasks.remove(id);
-            System.out.println("Задача удалена");
         } else {
             System.out.println("Задачи с таким ид нет");
         }
@@ -133,16 +129,21 @@ public class TaskManager {
             Subtask subtask = subtasks.get(id);
             subtasks.remove(id);
             changeEpicStatus(subtask.getIdEpic());
-            System.out.println("Подзадача удалена");
         } else {
             System.out.println("Подзадачи с таким ид нет");
         }
     }
 
     public void deleteEpicById(Integer id){
+        ArrayList<Subtask> epicSubtasks = getSubtasksFromEpic(id);
         if (epics.containsKey(id)){
+            if (epicSubtasks != null){
+                for (Subtask subtask: epicSubtasks){
+                    Integer idSubtask = subtask.getId();
+                    deleteSubtaskById(idSubtask);
+                }
+            }
             epics.remove(id);
-            System.out.println("Эпик удален");
         } else {
             System.out.println("Эпика с таким ид нет");
         }
@@ -156,10 +157,6 @@ public class TaskManager {
                 epicSubtasks.add(subtask);
             }
         }
-        //System.out.println("зАДАЧКИ");
-        //for(Subtask subtask: epicSubtasks){
-        //    System.out.println(subtask);
-        //}
         return epicSubtasks;
     }
 
@@ -180,7 +177,7 @@ public class TaskManager {
                     subtaskNew = true;
                 } else if (taskStatus.equals(TaskStatus.DONE)){
                     subtaskDone= true;
-                    System.out.println(subtaskDone);
+                    //System.out.println(subtaskDone);
                 } else {
                     subtaskDone = false;
                     subtaskNew = false;
