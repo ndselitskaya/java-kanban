@@ -1,5 +1,5 @@
+import java.util.ArrayList;
 import java.util.HashMap;
-//коммит пупупу
 //класс для работы с задачами
 public class TaskManager {
     private int counter = 0; //поле счетчик для ид
@@ -89,6 +89,118 @@ public class TaskManager {
         }
     }
 
+    //методы обновления задач по id
+    public void updateTask(Task task){
+        if (tasks.containsKey(task.getId())){
+            tasks.put(task.getId(), task);
+            System.out.println("Задача обновлена");
+        } else {
+            System.out.println("Такой задачи нет");
+        }
+    }
+
+    public void updateSubtask(Subtask subtask){
+        if (subtasks.containsKey(subtask.getId())){
+            subtasks.put(subtask.getId(), subtask);
+            System.out.println("Подзадача обновлена");
+            changeEpicStatus(subtask.getIdEpic());
+        } else {
+            System.out.println("Такой подзадачи нет");
+        }
+    }
+
+    public void updateEpic(Epic epic){
+        if (epics.containsKey(epic.getId())){
+            epics.put(epic.getId(), epic);
+            System.out.println("Эпик обновлен");
+        } else {
+            System.out.println("Такого эпика нет");
+        }
+    }
+
+    //методы удаления задач по ид
+    public void deleteTaskById(Integer id){
+        if (tasks.containsKey(id)){
+            tasks.remove(id);
+            System.out.println("Задача удалена");
+        } else {
+            System.out.println("Задачи с таким ид нет");
+        }
+    }
+
+    public void deleteSubtaskById(Integer id){
+        if (subtasks.containsKey(id)){
+            Subtask subtask = subtasks.get(id);
+            subtasks.remove(id);
+            changeEpicStatus(subtask.getIdEpic());
+            System.out.println("Подзадача удалена");
+        } else {
+            System.out.println("Подзадачи с таким ид нет");
+        }
+    }
+
+    public void deleteEpicById(Integer id){
+        if (epics.containsKey(id)){
+            epics.remove(id);
+            System.out.println("Эпик удален");
+        } else {
+            System.out.println("Эпика с таким ид нет");
+        }
+    }
+
+    //метод получения списка всех subtasks from epic
+    public ArrayList<Subtask> getSubtasksFromEpic(Integer id){
+        ArrayList<Integer> epicSubtasksId =new ArrayList<>();
+        ArrayList<Subtask> epicSubtasks =new ArrayList<>();
+        if (epics.containsKey(id)){
+            Epic epic = epics.get(id);
+            epicSubtasksId.addAll(epic.getSubtasks());
+            for (Integer epicSubtasksId1: epicSubtasksId){
+                epicSubtasks.add(subtasks.get(epicSubtasksId1));
+            }
+        } else {
+            System.out.println("Такого эпика нет");
+        }
+        return epicSubtasks;
+    }
+
+    //метод обновления статуса эпика
+    public void changeEpicStatus(Integer id){
+        ArrayList<TaskStatus> subtasksStatus =new ArrayList<>();
+        ArrayList<Subtask> epicSubtasks =getSubtasksFromEpic(id);
+        boolean subtaskNew = false;
+        boolean subtaskDone = false;
+        if (epics.containsKey(id)) {
+            //создание списка статусов подзадач эпика
+            for (Subtask subtask: epicSubtasks){
+                subtasksStatus.add(subtask.getStatus());
+            }
+            //проверка статусов позадач
+            for (TaskStatus taskStatus: subtasksStatus){
+                if (taskStatus.equals(TaskStatus.NEW)){
+                    subtaskNew = true;
+                } else if (taskStatus.equals(TaskStatus.DONE)){
+                    subtaskDone= true;
+                } else {
+                    subtaskDone = false;
+                    subtaskNew = false;
+                }
+            }
+            //обновление статусов эпика
+            if (epicSubtasks == null || subtaskNew) {
+                epics.get(id).setStatus(TaskStatus.NEW);
+            } else if (subtaskDone) {
+                epics.get(id).setStatus(TaskStatus.DONE);
+            } else {
+                epics.get(id).setStatus(TaskStatus.IN_PROGRESS);
+            }
+        } else {
+            System.out.println("Такого эпика нет");
+        }
+
+    }
+
+    //метод генерации нового ид
     public int generateId(){
         counter++;
         return counter;

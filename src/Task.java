@@ -29,6 +29,11 @@ public class Task {
         return status;
     }
 
+    // setter для status
+    public void setStatus(TaskStatus status){
+        this.status = status;
+    }
+
     // getter для описания
     public String getTaskName() {
         return taskName;

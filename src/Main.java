@@ -1,23 +1,44 @@
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Поехали!"); //убрать
-        createTasks();
+        TaskManager manager = new TaskManager();
+        Scanner scanner = new Scanner(System.in);
+        printMenu();
+        String command = scanner.nextLine();
+
+        switch (command) {
+            case "1":
+
+                break;
+            case "2":
+
+                break;
+            case "3":
+
+                break;
+            case "0":
+                return;
+        }
     }
-/*
-    public static HashMap<Integer, Task> createTasks() {
-        HashMap<Integer, Task> tasks = new HashMap<>();
-        tasks.put(1, new Task("ФЗ№4", "Выполнить задание", TaskStatus.NEW));
-        tasks.put(2, new Task("Убрать квартиру", "Помыть полы", TaskStatus.NEW));
+
+    private static void printMenu() {
+        System.out.println("Выберите команду:");
+        System.out.println("1 - Работа с задачами");
+        System.out.println("2 - Работа с подзадачами");
+        System.out.println("3 - Работа с эпиками");
+        System.out.println("0 - Выход");
+    }
+    /*
+    public static void createTasks() {
+        tasks.put(1, new Task(1,"ФЗ№4", "Выполнить задание", TaskStatus.NEW));
+        tasks.put(2, new Task(2, "Убрать квартиру", "Помыть полы", TaskStatus.NEW));
         //tasks.put(3, new Task("Прочесть учебник по алгоритмам", "Главы 1-4", TaskStatus.IN_PROGRESS));
         //tasks.put(4, new Task("Поставить релиз в ПРОМ", "Установка на блоки сендбокса возмещений", TaskStatus.NEW));
         //tasks.put(5, new Task("Написать инструкцию по мониторингу", "Описать алерты по фин.профилю", TaskStatus.DONE);
-        return tasks;
-    }
-
+     }
+/*
     public static HashMap<Integer, Task> createSubtasks() {
         HashMap<Integer, Task> subtasks = new HashMap<>();
         subtasks.put(1, new Subtask(1, "ФЗ№4", "Выполнить задание", TaskStatus.NEW));
