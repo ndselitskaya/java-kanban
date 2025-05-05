@@ -57,4 +57,13 @@ public class Task {
        return Objects.hash(id);
     }
 
+    @Override
+    public String toString() {
+        String result = "Task{" +
+                "id='" + id + '\'' +
+                ", taskName='" + taskName + '\'' +
+                ", taskDescription='" + taskDescription + '\'' +
+                ", status=" + status + '}';;
+        return result;
+    }
 }
