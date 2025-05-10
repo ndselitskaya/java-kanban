@@ -25,22 +25,31 @@ public class TaskManager {
     }
 
     //методы получения списка всех задач
-    public void getAllTasks() {
+    public ArrayList<Task> getAllTasks() {
+        ArrayList<Task> allTasks = new ArrayList<>();
         for (Task task : tasks.values()) {
+            allTasks.add(task);
             System.out.println(task);
         }
+        return allTasks;
     }
 
-    public void getAllSubtasks() {
+    public ArrayList<Subtask> getAllSubtasks() {
+        ArrayList<Subtask> allSubtasks = new ArrayList<>();
         for (Subtask subtask : subtasks.values()) {
+            allSubtasks.add(subtask);
             System.out.println(subtask);
         }
+        return allSubtasks;
     }
 
-    public void getAllEpics() {
+    public ArrayList<Epic> getAllEpics() {
+        ArrayList<Epic> allEpics = new ArrayList<>();
         for (Epic epic : epics.values()) {
+            allEpics.add(epic);
             System.out.println(epic);
         }
+        return allEpics;
     }
 
     //методы удаления всех задач
@@ -48,12 +57,19 @@ public class TaskManager {
         tasks.clear();
     }
 
+    //надо проверить!!!!
     public void deleteAllSubtasks() {
-        subtasks.clear();
+        for (Subtask subtask: subtasks.values()){
+            int idEpic = subtask.getIdEpic();
+            subtasks.remove(subtask);
+            changeEpicStatus(idEpic);
+        }
+        //можно удалить сабтаски и тип потом эпики взять проверить + очистить все сабтаски из их поля!
     }
 
     public void deleteAllEpics() {
         epics.clear();
+        subtasks.clear();
     }
 
     //методы получения списка задач по id
@@ -190,7 +206,7 @@ public class TaskManager {
     }
 
     //метод генерации нового ид
-    public int generateId() {
+    private int generateId() {
         counter++;
         return counter;
     }

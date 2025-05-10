@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -13,10 +15,13 @@ public class Main {
         manager.createEpic(epic2);
         Subtask subtask1 = new Subtask(epic1.getId(), 5, "Подзадача 1", "Описание подзадачи 1", TaskStatus.IN_PROGRESS);
         manager.createSubtask(subtask1);
+        epic1.addSubtask(subtask1.getId());
         Subtask subtask2 = new Subtask(epic2.getId(), 6, "Подзадача 2", "Описание подзадачи 2", TaskStatus.IN_PROGRESS);
         manager.createSubtask(subtask2);
+        epic2.addSubtask(subtask2.getId());
         Subtask subtask3 = new Subtask(epic2.getId(), 7, "Подзадача 3", "Описание подзадачи 3", TaskStatus.NEW);
         manager.createSubtask(subtask3);
+        epic2.addSubtask(subtask3.getId());
         printAllTasks(manager);
         System.out.println();
         System.out.println("=== Изменение статусов задач ===\n");
