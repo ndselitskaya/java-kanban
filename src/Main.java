@@ -3,13 +3,20 @@ public class Main {
     public static void main(String[] args) {
         TaskManager manager = new TaskManager();
         System.out.println("=== Создание задач ===\n");
-        Task task1 = manager.createTask(new Task(1, "ФЗ№4", "Выполнить задание", TaskStatus.NEW));
-        Task task2 = manager.createTask(new Task(2, "Убрать квартиру", "Помыть полы", TaskStatus.NEW));
-        Epic epic1 = manager.createEpic(new Epic(3, "Эпик 1", "Эпик с 1 подзадачей", TaskStatus.IN_PROGRESS));
-        Epic epic2 = manager.createEpic(new Epic(4, "Эпик 2", "Эпик с 2-мя подзадачами", TaskStatus.NEW));
-        Subtask subtask1 = manager.createSubtask(new Subtask(epic1.getId(), 5, "Подзадача 1", "Описание подзадачи 1", TaskStatus.IN_PROGRESS));
-        Subtask subtask2 = manager.createSubtask(new Subtask(epic2.getId(), 6, "Подзадача 2", "Описание подзадачи 2", TaskStatus.IN_PROGRESS));
-        Subtask subtask3 = manager.createSubtask(new Subtask(epic2.getId(), 7, "Подзадача 3", "Описание подзадачи 3", TaskStatus.NEW));
+        Task task1 = new Task(1, "ФЗ№4", "Выполнить задание", TaskStatus.NEW);
+        manager.createTask(task1);
+        Task task2 = new Task(2, "Убрать квартиру", "Помыть полы", TaskStatus.NEW);
+        manager.createTask(task2);
+        Epic epic1 = new Epic(3, "Эпик 1", "Эпик с 1 подзадачей", TaskStatus.IN_PROGRESS);
+        manager.createEpic(epic1);
+        Epic epic2 = new Epic(4, "Эпик 2", "Эпик с 2-мя подзадачами", TaskStatus.NEW);
+        manager.createEpic(epic2);
+        Subtask subtask1 = new Subtask(epic1.getId(), 5, "Подзадача 1", "Описание подзадачи 1", TaskStatus.IN_PROGRESS);
+        manager.createSubtask(subtask1);
+        Subtask subtask2 = new Subtask(epic2.getId(), 6, "Подзадача 2", "Описание подзадачи 2", TaskStatus.IN_PROGRESS);
+        manager.createSubtask(subtask2);
+        Subtask subtask3 = new Subtask(epic2.getId(), 7, "Подзадача 3", "Описание подзадачи 3", TaskStatus.NEW);
+        manager.createSubtask(subtask3);
         printAllTasks(manager);
         System.out.println();
         System.out.println("=== Изменение статусов задач ===\n");
