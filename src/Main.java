@@ -33,7 +33,7 @@ public class Main {
         manager.updateSubtask(subtask1);
         System.out.println("Подзадача с новым статусом: ");
         manager.getSubtaskById(subtask1.getId());
-        epic2.setStatus(TaskStatus.NEW);
+        epic2.setStatus(TaskStatus.IN_PROGRESS);
         manager.updateEpic(epic2);
         System.out.println("Эпики с новыми статусами: ");
         manager.getAllEpics();

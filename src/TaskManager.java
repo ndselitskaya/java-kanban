@@ -57,14 +57,7 @@ public class TaskManager {
         tasks.clear();
     }
 
-    //надо проверить!!!!
     public void deleteAllSubtasks() {
-        /*for (Subtask subtask: subtasks.values()){
-            int idEpic = subtask.getIdEpic();
-            subtasks.remove(subtask);
-            changeEpicStatus(idEpic);
-        }*/
-        //можно удалить сабтаски и тип потом эпики взять проверить + очистить все сабтаски из их поля!
         subtasks.clear();
         for(Epic epic: epics.values()){
             Integer idEpic = epic.getId();
@@ -187,6 +180,10 @@ public class TaskManager {
     public void changeEpicStatus(Integer id) {
         ArrayList<TaskStatus> subtasksStatus = new ArrayList<>();
         ArrayList<Subtask> epicSubtasks = getSubtasksFromEpic(id);
+        if (subtasks.isEmpty()) {
+            epics.get(id).setStatus(TaskStatus.NEW);
+            return;
+        }
         boolean subtaskNew = false;
         boolean subtaskDone = false;
         if (epics.containsKey(id)) {
@@ -200,14 +197,13 @@ public class TaskManager {
                     subtaskNew = true;
                 } else if (taskStatus.equals(TaskStatus.DONE)) {
                     subtaskDone = true;
-                    //System.out.println(subtaskDone);
                 } else {
                     subtaskDone = false;
                     subtaskNew = false;
                 }
             }
             //обновление статусов эпика
-            if (epicSubtasks == null || subtaskNew) {
+            if (subtaskNew) {
                 epics.get(id).setStatus(TaskStatus.NEW);
             } else if (subtaskDone) {
                 epics.get(id).setStatus(TaskStatus.DONE);
