@@ -59,12 +59,18 @@ public class TaskManager {
 
     //надо проверить!!!!
     public void deleteAllSubtasks() {
-        for (Subtask subtask: subtasks.values()){
+        /*for (Subtask subtask: subtasks.values()){
             int idEpic = subtask.getIdEpic();
             subtasks.remove(subtask);
             changeEpicStatus(idEpic);
-        }
+        }*/
         //можно удалить сабтаски и тип потом эпики взять проверить + очистить все сабтаски из их поля!
+        subtasks.clear();
+        for(Epic epic: epics.values()){
+            Integer idEpic = epic.getId();
+            epic.deleteSubtask(idEpic);
+            changeEpicStatus(idEpic);
+        }
     }
 
     public void deleteAllEpics() {
@@ -73,28 +79,37 @@ public class TaskManager {
     }
 
     //методы получения списка задач по id
-    public void getTaskById(Integer id) {
+    public Task getTaskById(Integer id) {
+        Task task = null;
         if (tasks.containsKey(id)) {
             System.out.println(tasks.get(id));
+            task = tasks.get(id);
         } else {
             System.out.println("Задачи с таким ид нет");
         }
+        return task;
     }
 
-    public void getSubtaskById(Integer id) {
+    public Subtask getSubtaskById(Integer id) {
+        Subtask subtask = null;
         if (subtasks.containsKey(id)) {
             System.out.println(subtasks.get(id));
+            subtask = subtasks.get(id);
         } else {
             System.out.println("Подзадачи с таким ид нет");
         }
+        return subtask;
     }
 
-    public void getEpicById(Integer id) {
+    public Epic getEpicById(Integer id) {
+        Epic epic = null;
         if (epics.containsKey(id)) {
             System.out.println(epics.get(id));
+            epic = epics.get(id);
         } else {
             System.out.println("Эпика с таким ид нет");
         }
+        return epic;
     }
 
     //методы обновления задач
@@ -161,7 +176,7 @@ public class TaskManager {
     public ArrayList<Subtask> getSubtasksFromEpic(Integer id) {
         ArrayList<Subtask> epicSubtasks = new ArrayList<>();
         for (Subtask subtask : subtasks.values()) {
-            if (subtask.idEpic == id) {
+            if(subtask.getIdEpic() == id) {
                 epicSubtasks.add(subtask);
             }
         }
