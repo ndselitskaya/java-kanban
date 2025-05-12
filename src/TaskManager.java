@@ -26,30 +26,16 @@ public class TaskManager {
 
     //методы получения списка всех задач
     public ArrayList<Task> getAllTasks() {
-        ArrayList<Task> allTasks = new ArrayList<>();
-        for (Task task : tasks.values()) {
-            allTasks.add(task);
-            System.out.println(task);
-        }
-        return allTasks;
+        return new ArrayList<>(tasks.values());
     }
 
+
     public ArrayList<Subtask> getAllSubtasks() {
-        ArrayList<Subtask> allSubtasks = new ArrayList<>();
-        for (Subtask subtask : subtasks.values()) {
-            allSubtasks.add(subtask);
-            System.out.println(subtask);
-        }
-        return allSubtasks;
+        return new ArrayList<>(subtasks.values());
     }
 
     public ArrayList<Epic> getAllEpics() {
-        ArrayList<Epic> allEpics = new ArrayList<>();
-        for (Epic epic : epics.values()) {
-            allEpics.add(epic);
-            System.out.println(epic);
-        }
-        return allEpics;
+        return new ArrayList<>(epics.values());
     }
 
     //методы удаления всех задач
