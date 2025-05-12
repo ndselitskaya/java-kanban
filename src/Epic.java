@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Epic extends Task {
-    protected ArrayList<Integer> subtasksId;
+    private ArrayList<Integer> subtasksId;
 
     public Epic(Integer id, String taskName, String taskDescription, TaskStatus status) {
         super(id, taskName, taskDescription, status);

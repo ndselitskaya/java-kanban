@@ -26,15 +26,23 @@ public class TaskManager {
 
     //методы получения списка всех задач
     public ArrayList<Task> getAllTasks() {
+        for (Task task : tasks.values()) {
+            System.out.println(task);
+        }
         return new ArrayList<>(tasks.values());
     }
 
-
     public ArrayList<Subtask> getAllSubtasks() {
+        for (Subtask subtask : subtasks.values()) {
+            System.out.println(subtask);
+        }
         return new ArrayList<>(subtasks.values());
     }
 
     public ArrayList<Epic> getAllEpics() {
+        for (Epic epic : epics.values()) {
+            System.out.println(epic);
+        }
         return new ArrayList<>(epics.values());
     }
 
@@ -163,7 +171,7 @@ public class TaskManager {
     }
 
     //метод обновления статуса эпика
-    public void changeEpicStatus(Integer id) {
+    private void changeEpicStatus(Integer id) {
         ArrayList<TaskStatus> subtasksStatus = new ArrayList<>();
         ArrayList<Subtask> epicSubtasks = getSubtasksFromEpic(id);
         if (subtasks.isEmpty()) {
