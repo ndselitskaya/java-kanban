@@ -1,9 +1,7 @@
-import java.util.ArrayList;
-
 public class Main {
 
     public static void main(String[] args) {
-        TaskManager manager = new TaskManager();
+        TaskManager manager = new InMemoryTaskManager();
         System.out.println("=== Создание задач ===\n");
         Task task1 = new Task(1, "ФЗ№4", "Выполнить задание", TaskStatus.NEW);
         manager.createTask(task1);
