@@ -15,7 +15,7 @@ public class Subtask extends Task{
     public String toString() {
         String result = "Subtask{" +
                 "idEpic='" + idEpic + '\'' +
-                "id='" + id + '\'' +
+                ", id='" + id + '\'' +
                 ", taskName='" + taskName + '\'' +
                 ", taskDescription='" + taskDescription + '\'' +
                 ", status=" + status + '}';;

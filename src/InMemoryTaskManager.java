@@ -7,7 +7,7 @@ public class InMemoryTaskManager implements TaskManager {
     private final HashMap<Integer, Task> tasks = new HashMap<>();
     private final HashMap<Integer, Subtask> subtasks = new HashMap<>();
     private final HashMap<Integer, Epic> epics = new HashMap<>();
-    private final ArrayList<Task> hisoryTasks= new ArrayList<>();
+    InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
 
     //методы создания задач
     @Override
@@ -83,7 +83,7 @@ public class InMemoryTaskManager implements TaskManager {
         if (tasks.containsKey(id)) {
             System.out.println(tasks.get(id));
             task = tasks.get(id);
-            addTaskToHistory(task);
+            historyManager.add(task);
         } else {
             System.out.println("Задачи с таким ид нет");
         }
@@ -96,7 +96,7 @@ public class InMemoryTaskManager implements TaskManager {
         if (subtasks.containsKey(id)) {
             System.out.println(subtasks.get(id));
             subtask = subtasks.get(id);
-            addTaskToHistory(subtask);
+            historyManager.add(subtask);
         } else {
             System.out.println("Подзадачи с таким ид нет");
         }
@@ -109,7 +109,8 @@ public class InMemoryTaskManager implements TaskManager {
         if (epics.containsKey(id)) {
             System.out.println(epics.get(id));
             epic = epics.get(id);
-            addTaskToHistory(epic);
+            historyManager.add(epic);
+            historyManager.getHistory();
         } else {
             System.out.println("Эпика с таким ид нет");
         }
@@ -240,18 +241,10 @@ public class InMemoryTaskManager implements TaskManager {
         return counter;
     }
 
-    //метод добавления просмотренной задачи в кеш
-    private void addTaskToHistory(Task task) {
-        hisoryTasks.add(task);
-        if (hisoryTasks.size()>10){
-            hisoryTasks.removeFirst();
-        }
-    }
-
-    //метод просмотра истории задач
+    //метод получения всех просмотренных задач
     @Override
     public ArrayList<Task> getHistory(){
-        System.out.println(hisoryTasks);
-        return hisoryTasks;
+        return historyManager.getHistory();
     }
+
 }
