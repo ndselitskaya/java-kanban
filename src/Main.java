@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -44,6 +46,8 @@ public class Main {
         System.out.println("Эпик и подзадачи после удаления:");
         manager.getAllEpics();
         manager.getAllSubtasks();
+        System.out.println("Просмотренные задачи:");
+        ArrayList<Task> test = manager.getHistory();
     }
 
     private static void printAllTasks(TaskManager manager) {
