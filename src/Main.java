@@ -48,7 +48,7 @@ public class Main {
         System.out.println("Эпик и подзадачи после удаления:");
         manager.getAllEpics();
         manager.getAllSubtasks();
-        System.out.println("Просмотренные задачи:");
+        System.out.println("=== Просмотренные задачи: ===\n");
         ArrayList<Task> test = manager.getHistory();
     }
 
