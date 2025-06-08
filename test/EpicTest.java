@@ -18,5 +18,15 @@ class EpicTest {
         Epic epic1 = new Epic(3, "Epic1", "Description1", TaskStatus.IN_PROGRESS);
         Epic epic2 = new Epic(4, "Epic1", "Description1", TaskStatus.IN_PROGRESS);
 
-        assertNotEquals(epic1, epic2, "Эпики с разным id не должны быть равны");}
+        assertNotEquals(epic1, epic2, "Эпики с разным id не должны быть равны");
+    }
+
+    @Test
+    void EpicCannotBeSubtaskOfEpic() {
+        Epic epic1 = new Epic(1, "Epic1", "Description1", TaskStatus.NEW);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            epic1.addSubtask(epic1.getId());
+        }, "Эпик не может быть подзадачей самого себя");
+    }
 }

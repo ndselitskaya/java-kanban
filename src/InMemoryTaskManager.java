@@ -20,7 +20,14 @@ public class InMemoryTaskManager implements TaskManager {
     public void createSubtask(Subtask subtask) {
         subtask.setId(generateId());
         subtasks.put(subtask.getId(), subtask);
+        if (epics.get(subtask.getIdEpic()) == null) {
+            throw new IllegalArgumentException("Эпика с таким ид нет");
+        }
+        if (subtask.getId() == subtask.getIdEpic()) {
+            throw new IllegalArgumentException("Подзадача не может быть своим же эпиком");
+        }
         changeEpicStatus(subtask.getIdEpic());
+        epics.get(subtask.getIdEpic()).addSubtask(subtask.getId());
     }
 
     @Override

@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SubtaskTest {
 
+    TaskManager manager = Managers.getDefault();
+
     @Test
     void subtasksWithSameIdShouldBeEqual() {
         Subtask subtask1 = new Subtask(1, 5, "Subtask1", "Description1", TaskStatus.IN_PROGRESS);
@@ -21,4 +23,23 @@ class SubtaskTest {
         assertNotEquals(subtask1, subtask2, "Подзадачи с разным id не должны быть равны");
     }
 
+    @Test
+    void SubtaskCannotBeSubtaskOfNullEpic() {
+        Epic epic1 = new Epic(1, "Epic1", "Description1", TaskStatus.NEW);
+        Subtask subtask1 = new Subtask(epic1.getId(), 1, "Subtask1", "Description1", TaskStatus.NEW);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            manager.createSubtask(subtask1);
+        }, "Эпика с таким ид нет");
+    }
+
+    @Test
+    void SubtaskCannotBeEpic() {
+
+        Subtask subtask1 = new Subtask(1, 1, "Subtask1", "Description1", TaskStatus.NEW);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            manager.createSubtask(subtask1);
+        }, "Подзадача не может быть своим же эпиком");
+    }
 }
