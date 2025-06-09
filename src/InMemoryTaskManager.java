@@ -1,13 +1,15 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 //класс для работы с задачами
 public class InMemoryTaskManager implements TaskManager {
     private int counter = 0; //поле счетчик для ид
-    private final HashMap<Integer, Task> tasks = new HashMap<>();
-    private final HashMap<Integer, Subtask> subtasks = new HashMap<>();
-    private final HashMap<Integer, Epic> epics = new HashMap<>();
-    HistoryManager historyManager = Managers.getDefaultHistory();
+    private final Map<Integer, Task> tasks = new HashMap<>();
+    private final Map<Integer, Subtask> subtasks = new HashMap<>();
+    private final Map<Integer, Epic> epics = new HashMap<>();
+    private HistoryManager historyManager = Managers.getDefaultHistory();
 
     //методы создания задач
     @Override
@@ -250,7 +252,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     //метод получения всех просмотренных задач
     @Override
-    public ArrayList<Task> getHistory(){
+    public List<Task> getHistory(){
         return historyManager.getHistory();
     }
 

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public interface TaskManager {
     //методы создания задач
@@ -44,7 +45,7 @@ public interface TaskManager {
     void deleteEpicById(Integer id);
 
     //метод получения списка всех subtasks from epic
-    ArrayList<Subtask> getSubtasksFromEpic(Integer id);
+    List<Subtask> getSubtasksFromEpic(Integer id);
 
-    ArrayList<Task> getHistory();
+    List<Task> getHistory();
 }

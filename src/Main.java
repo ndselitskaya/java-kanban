@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -46,7 +47,7 @@ public class Main {
         manager.getAllEpics();
         manager.getAllSubtasks();
         System.out.println("=== Просмотренные задачи: ===\n");
-        ArrayList<Task> test = manager.getHistory();
+        List<Task> test = manager.getHistory();
     }
 
     private static void printAllTasks(TaskManager manager) {

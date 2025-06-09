@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager{
 
-    private final ArrayList<Task> historyTasks= new ArrayList<>();
+    private final List<Task> historyTasks= new ArrayList<>();
+
     //метод добавления просмотренной задачи в кеш
     @Override
     public void add(Task task) {
@@ -14,7 +16,7 @@ public class InMemoryHistoryManager implements HistoryManager{
 
     //метод просмотра истории задач
     @Override
-    public ArrayList<Task> getHistory(){
+    public List<Task> getHistory(){
         System.out.println(historyTasks);
         return historyTasks;
     }
