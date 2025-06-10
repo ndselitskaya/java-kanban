@@ -40,7 +40,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     //методы получения списка всех задач
     @Override
-    public ArrayList<Task> getAllTasks() {
+    public List<Task> getAllTasks() {
         for (Task task : tasks.values()) {
             System.out.println(task);
         }
@@ -48,7 +48,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Subtask> getAllSubtasks() {
+    public List<Subtask> getAllSubtasks() {
         for (Subtask subtask : subtasks.values()) {
             System.out.println(subtask);
         }
@@ -56,7 +56,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Epic> getAllEpics() {
+    public List<Epic> getAllEpics() {
         for (Epic epic : epics.values()) {
             System.out.println(epic);
         }
