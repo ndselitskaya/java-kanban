@@ -38,7 +38,7 @@ class InMemoryHistoryManagerTest {
     }
 
     @Test
-    void addedTaskShoudBeAtTheEndOfTheList(){
+    void addedTaskShoudBeAtTheEndOfTheList() {
         Epic epic2 = new Epic(4, "Epic2", "Description2", TaskStatus.IN_PROGRESS);
         historyManager.add(epic2);
         List<Task> history = historyManager.getHistory();
@@ -46,7 +46,7 @@ class InMemoryHistoryManagerTest {
     }
 
     @Test
-    void oldVersionTaskShoudBeSavedAfterUpdate(){
+    void oldVersionTaskShoudBeSavedAfterUpdate() {
         List<Task> history = historyManager.getHistory();
         Task oldTask = task1;
         int idOldTask = history.indexOf(task1);
