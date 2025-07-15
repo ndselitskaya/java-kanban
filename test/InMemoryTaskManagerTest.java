@@ -66,6 +66,4 @@ class InMemoryTaskManagerTest {
         assertEquals(TaskStatus.DONE, manager.getEpicById(3).getStatus(),
                 "Статус эпика должен обновляться при изменении подзадач");
     }
-
-
 }
