@@ -20,4 +20,10 @@ public class InMemoryHistoryManager implements HistoryManager{
         System.out.println(historyTasks);
         return historyTasks;
     }
+
+    //метод удаления вновь просмотренной задачи
+    @Override
+    public void remove(int id) {
+       historyTasks.remove(id);
+    }
 }
