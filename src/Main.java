@@ -51,7 +51,6 @@ public class Main {
         if (history.isEmpty()) {
             System.out.println("История просмотров пуста");
         } else {
-            history.forEach(System.out::println);
             for (Task task : history) {
                 System.out.println(task);
             }
