@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InMemoryHistoryManager implements HistoryManager{
+public class InMemoryHistoryManager implements HistoryManager {
     private static class Node {
         Task task;
         Node prev;
@@ -30,7 +30,7 @@ public class InMemoryHistoryManager implements HistoryManager{
 
     //метод просмотра истории задач (аналог getTasks(), поэтому его нет)
     @Override
-    public List<Task> getHistory(){
+    public List<Task> getHistory() {
         List<Task> tasks = new ArrayList<>();
         Node current = head;
         while (current != null) {
