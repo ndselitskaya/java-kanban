@@ -8,29 +8,30 @@ public class Task {
     protected TaskStatus status;
 
     //конструктор класса
-    public Task(Integer id, String taskName, String taskDescription, TaskStatus status){
-        this.id=id;
-        this.taskName=taskName;
-        this.taskDescription =taskDescription;
+    public Task(Integer id, String taskName, String taskDescription, TaskStatus status) {
+        this.id = id;
+        this.taskName = taskName;
+        this.taskDescription = taskDescription;
         this.status = status;
     }
 
     // getter для id
-    public Integer getId(){
+    public Integer getId() {
         return id;
     }
+
     // setter для id
-    public void setId(Integer id){
-        this.id=id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     // getter для статуса
-    public TaskStatus getStatus(){
+    public TaskStatus getStatus() {
         return status;
     }
 
     // setter для status
-    public void setStatus(TaskStatus status){
+    public void setStatus(TaskStatus status) {
         this.status = status;
     }
 
@@ -54,7 +55,7 @@ public class Task {
 
     @Override
     public int hashCode() {
-       return Objects.hash(id);
+        return Objects.hash(id);
     }
 
     @Override
@@ -63,7 +64,8 @@ public class Task {
                 "id='" + id + '\'' +
                 ", taskName='" + taskName + '\'' +
                 ", taskDescription='" + taskDescription + '\'' +
-                ", status=" + status + '}';;
+                ", status=" + status + '}';
+        ;
         return result;
     }
 }
