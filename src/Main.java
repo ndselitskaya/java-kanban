@@ -47,7 +47,16 @@ public class Main {
         manager.getAllEpics();
         manager.getAllSubtasks();
         System.out.println("=== Просмотренные задачи: ===\n");
-        List<Task> test = manager.getHistory();
+        List<Task> history = manager.getHistory();
+        if (history.isEmpty()) {
+            System.out.println("История просмотров пуста");
+        } else {
+            System.out.println("Последние просмотренные задачи:");
+            history.forEach(System.out::println);
+            for (Task task : history) {
+                System.out.println(task);
+            }
+        }
     }
 
     private static void printAllTasks(TaskManager manager) {
