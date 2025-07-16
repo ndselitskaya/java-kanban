@@ -1,13 +1,13 @@
-public class Subtask extends Task{
+public class Subtask extends Task {
     private int idEpic;
 
     public Subtask(int idEpic, Integer id, String taskName, String taskDescription, TaskStatus status) {
         super(id, taskName, taskDescription, status);
-        this.idEpic=idEpic;
+        this.idEpic = idEpic;
     }
 
     // getter для эпика
-    public int getIdEpic(){
+    public int getIdEpic() {
         return idEpic;
     }
 
@@ -18,7 +18,8 @@ public class Subtask extends Task{
                 ", id='" + id + '\'' +
                 ", taskName='" + taskName + '\'' +
                 ", taskDescription='" + taskDescription + '\'' +
-                ", status=" + status + '}';;
+                ", status=" + status + '}';
+        ;
         return result;
     }
 }

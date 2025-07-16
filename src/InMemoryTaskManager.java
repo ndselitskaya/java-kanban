@@ -72,7 +72,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void deleteAllSubtasks() {
         subtasks.clear();
-        for(Epic epic: epics.values()){
+        for (Epic epic : epics.values()) {
             Integer idEpic = epic.getId();
             epic.deleteSubtask(idEpic);
             changeEpicStatus(idEpic);
@@ -197,7 +197,7 @@ public class InMemoryTaskManager implements TaskManager {
     public ArrayList<Subtask> getSubtasksFromEpic(Integer id) {
         ArrayList<Subtask> epicSubtasks = new ArrayList<>();
         for (Subtask subtask : subtasks.values()) {
-            if(subtask.getIdEpic() == id) {
+            if (subtask.getIdEpic() == id) {
                 epicSubtasks.add(subtask);
             }
         }
@@ -252,8 +252,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     //метод получения всех просмотренных задач
     @Override
-    public List<Task> getHistory(){
+    public List<Task> getHistory() {
         return historyManager.getHistory();
     }
-
 }

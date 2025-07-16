@@ -11,29 +11,34 @@ class InMemoryHistoryManagerTest {
     private Task task1;
     private Task task2;
     private Epic epic1;
+    private Subtask subtask1;
+
 
     @BeforeEach
     void beforeEach() {
         task1 = new Task(1, "Task1", "Description1", TaskStatus.NEW);
         task2 = new Task(2, "Task2", "Description2", TaskStatus.NEW);
         epic1 = new Epic(3, "Epic1", "Description1", TaskStatus.IN_PROGRESS);
+        subtask1 = new Subtask(3, 4, "Subtask1", "Desc", TaskStatus.NEW);
         taskManager.createTask(task1);
         taskManager.createTask(task2);
         taskManager.createEpic(epic1);
+        taskManager.createSubtask(subtask1);
         historyManager.add(task1);
         historyManager.add(task2);
         historyManager.add(epic1);
+        historyManager.add(subtask1);
     }
 
     @Test
     void addTasksToHistoryManager() {
         List<Task> history = historyManager.getHistory();
         assertNotNull(history, "После добавления задач, история не должна быть пустой.");
-        assertEquals(3, history.size(), "После добавления задачи, история не должна быть пустой.");
+        assertEquals(4, history.size(), "После добавления задачи, история не должна быть пустой.");
     }
 
     @Test
-    void addedTaskShoudBeAtTheEndOfTheList(){
+    void addedTaskShoudBeAtTheEndOfTheList() {
         Epic epic2 = new Epic(4, "Epic2", "Description2", TaskStatus.IN_PROGRESS);
         historyManager.add(epic2);
         List<Task> history = historyManager.getHistory();
@@ -41,12 +46,35 @@ class InMemoryHistoryManagerTest {
     }
 
     @Test
-    void oldVersionTaskShoudBeSavedAfterUpdate(){
+    void oldVersionTaskShoudBeSavedAfterUpdate() {
         List<Task> history = historyManager.getHistory();
         Task oldTask = task1;
         int idOldTask = history.indexOf(task1);
         task1.setStatus(TaskStatus.IN_PROGRESS);
         historyManager.add(task1);
         assertEquals(oldTask, history.get(idOldTask), "Прошлая версия задачи должна быть в списке");
+    }
+
+    @Test
+    void add_ShouldMoveDuplicateToEnd() {
+        historyManager.add(task1); // дубликат
+        List<Task> history = historyManager.getHistory();
+        assertEquals(4, history.size(), "Дубликат задачи должен быть удален");
+        assertEquals(task1, history.get(3), "Повторный вызов задачи должен быть в конце");
+    }
+
+    @Test
+    void remove_ShouldDeleteTaskFromHistory() {
+        historyManager.remove(task1.getId());
+        List<Task> history = historyManager.getHistory();
+        assertEquals(3, history.size(), "После удаления должна остаться 3 задачи");
+        assertFalse(history.contains(task1), "Удаленная задача не должна быть в истории");
+    }
+
+    @Test
+    void getHistory_ShouldReturnCorrectOrder() {
+        List<Task> expected = List.of(task1, task2, epic1, subtask1);
+        assertEquals(expected, historyManager.getHistory(),
+                "Порядок задач в истории должен соответствовать порядку добавления");
     }
 }

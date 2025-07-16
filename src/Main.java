@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -47,7 +46,14 @@ public class Main {
         manager.getAllEpics();
         manager.getAllSubtasks();
         System.out.println("=== Просмотренные задачи: ===\n");
-        List<Task> test = manager.getHistory();
+        List<Task> history = manager.getHistory();
+        if (history.isEmpty()) {
+            System.out.println("История просмотров пуста");
+        } else {
+            for (Task task : history) {
+                System.out.println(task);
+            }
+        }
     }
 
     private static void printAllTasks(TaskManager manager) {
